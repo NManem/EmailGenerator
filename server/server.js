@@ -5,10 +5,6 @@ import express from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-
-
-
-
 const app = express();
 app.use(express.json());
 const PORT = 3000;
@@ -17,9 +13,12 @@ const __dirname = dirname(__filename);
 
 
 import openaiRouter  from './routes/openai.js'
+import gmailRouter from './routes/gmail.js'
 app.use('/assets', express.static(path.resolve(__dirname, '../src/assets/')));
 
 app.use('/api/openai', openaiRouter)
+app.use('/api/gmail', gmailRouter)
+
 
 app.use((req, res) => res.sendStatus(404)); 
 

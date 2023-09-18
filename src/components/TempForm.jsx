@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const TempForm = () => {
+const TempForm = (props) => {
   // const [experience, setExperience] = useState('');
   // const [role, setRole] = useState('');
-  const [email, setEmail] = useState('');
+  const [draft, setDraft] = useState('');
   const emptyForm = { experience: '', role: '' };
   const [formData, setFormData] = useState(emptyForm);
 
@@ -15,7 +16,7 @@ const TempForm = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    async function submit(){
+    async function submit() {
       const response = await fetch(`/api/openai/email`, {
         method: 'POST',
         headers: {
@@ -23,8 +24,8 @@ const TempForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      const newEmail = await response.json()
-      setEmail(newEmail)
+      const newDraft = await response.json()
+      setDraft(newDraft)
       setFormData(emptyForm)
     }
     submit()
@@ -61,7 +62,14 @@ const TempForm = () => {
       </div>
       <div>
         <h1>Response</h1>
-        <p>{email}</p>
+        <p>{draft}</p>
+        {draft && <Link to="/edit" state={{ draft: draft }}>Edit Email Draft</Link>}
+        {/* {draft && <Link to={{
+          pathname: "/edit",
+          state: { draft: draft }
+        }}>
+          Edit Email Draft
+        </Link>} */}
       </div>
     </>
   );
