@@ -6,7 +6,7 @@
 const emailGeneratorV1 =[
   {
     "role": "system",
-    "content": "You will be provided work experience and a job description. Write a simple and concise email that I will be emailing to job recruiters. When using the experience, prioritize my work experience UNLESS there is project experience that closely aligns with the roles needs. Please follow the email template below. In the response, please ONLY INCLUDE the message (no bs stuff like “here is ur response” or “this is what i came up with..”)\nTemplate:\nIntro:\nHello,\n</n>\n(first paragraph) Hope this finds you well. I am very excited about the <role title> role because of the similarities with my work experience and my passion for <1-3 word summary of a feature of the company(Ex. spotify→music, robinhood→finance)\n</n>\n(second paragraph. i want this paragraph to be simple and concise. something that recruiters can easily and quickly read through. make sure this paragraph has sentences that are NOT super long. and i want to reitarte this should only be 2 sentence that are VERY CLEAR. no more than 65 words) \n(1st sentence) (summary of my work work experience that is relavent to the role)\n(2nd sentence) (why i would be a valuable asset to the company)\n(3rd sentence) I'd be happy to delve deeper into my experiences should you find interest.\n</n>\n(final paragraph) Thank you for your time and consideration. I look forward to hearing back!\n</n> \n(signature)Best regards,\nNotes: \n- I want the message to not be able to be detected by AI detectors.\n- Do not mention resume or email or any contact info in the closing paragraph, just a thank you and excited to hear back\nWork Experience:\n"
+    "content": "You will be provided work experience and a job description. Write a simple and concise email that I will be emailing to job recruiters. When using the experience, prioritize my work experience UNLESS there is project experience that closely aligns with the roles needs. Please follow the email template below. In the response, please ONLY INCLUDE the message (no bs stuff like “here is ur response” or “this is what i came up with..”)\nTemplate:\nIntro:\nHello,\n</n>\n(first paragraph, make sure to put bold tags(<b></b>) around the job role) Hope this finds you well. I am very excited about the <role title> role because of the similarities with my work experience and my passion for <1-3 word summary of a feature of the company(Ex. spotify→music, robinhood→finance)\n</n>\n(second paragraph. i want this paragraph to be simple and concise. something that recruiters can easily and quickly read through. make sure this paragraph has sentences that are NOT super long. and i want to reitarte this should only be 2 sentence that are VERY CLEAR. no more than 65 words) \n(1st sentence) (summary of my work work experience that is relavent to the role)\n(2nd sentence) (why i would be a valuable asset to the company)\n(3rd sentence) I'd be happy to delve deeper into my experiences should you find interest.\n</n>\n(final paragraph) Thank you for your time and consideration. I look forward to hearing back!\n</n> \n(signature)Best regards,\nNotes: \n- I want the message to not be able to be detected by AI detectors.\n- Do not mention resume or email or any contact info in the closing paragraph, just a thank you and excited to hear back\nWork Experience:\n"
   },
   {
     "role": "user",
@@ -79,4 +79,36 @@ const subjectTitlePrompt =[
     "content": "Nitesh Manem: Marrying Backend Expertise with a Passion for Music\nHarmonizing Data & Music: Nitesh Manem for Backend Engineer Role\nFrom EY's Vaccination APIs to Music: Nitesh Manem's Backend Journey\nBackend Mastery Meets Melody: Nitesh Manem's Unique Blend\nMusic to Your Ears: Nitesh Manem's Backend Skills Ready to Amplify"
   }]
 
-export { emailGeneratorV1, testMessages, subjectTitlePrompt };
+const companyPrompt = [
+  {
+    "role": "system",
+    "content": "You will be given an email. Please extract the name of company that the email is targeted to. ONLY output the company name, no miscellanous text like \"The company is ...\" or \"Here is the company:\""
+  },
+  {
+    "role": "user",
+    "content": "Hello,\n\nHope this finds you well. I am very excited about the **Web Engineer role at Robinhood** because of the similarities with my work experience and my passion for democratizing finance.\n\nHaving served as a Software Engineer at Ernst & Young and Swell, I've gained extensive experience in **designing and optimizing web applications using React, Next.js, and TypeScript**, similar to the technologies Robinhood uses. My hands-on experience with these technologies and my ability to enhance user experiences align well with the expectations of the Web Platform Team. I'd be happy to delve deeper into my experiences should you find interest.\n\nThank you for your time and consideration. I look forward to hearing back!\n\nBest regards,"
+  },
+  {
+    "role": "assistant",
+    "content": "Robinhood"
+  },
+  {
+    "role": "user",
+    "content": "Hello,\n\nHope this finds you well. I am very excited about the **Software Engineer (L3) - Marketplace role** at Twilio due to my substantial background in backend software engineering, particularly with Java and the alignment of my experience with the functions of the Marketplace platform.\n\nAt Ernst & Young, I engineered and sustained a Java RESTful API to address user requirements efficiently, while at Swell, I architected and implemented a CI/CD pipeline, improving application delivery time. My expertise in backend development and ability to streamline applications positions me uniquely to contribute meaningfully to the Twilio Marketplace team. I'd be happy to delve deeper into my experiences should you find interest.\n\nThank you for your time and consideration. I look forward to hearing back!\n\nBest regards,"
+  },
+  {
+    "role": "assistant",
+    "content": "Twilio"
+  },
+  {
+    "role": "user",
+    "content": "Hello,\n\nHope this finds you well. I am very excited about the <b>Frontend Software Engineer</b> role at Kindo due to my relevant experience in frontend development and my passion for being at the forefront of the AI transformation.\n\nWith my experience as a Software Engineer at Ernst & Young and Swell, I have engineered web applications, implemented automated testing and deployment processes, and optimized application performance. These skills align with the qualifications and responsibilities of the role at Kindo. My proficiency in Typescript and React, along with my ability to work independently and collaborate effectively in dynamic environments, make me well-suited for this position. I'd be happy to delve deeper into my experiences should you find interest.\n\nThank you for your time and consideration. I look forward to hearing back!\n\nBest regards,"
+  },
+  {
+    "role": "assistant",
+    "content": "Kindo"
+  }
+]
+
+
+export { emailGeneratorV1, testMessages, subjectTitlePrompt, companyPrompt };

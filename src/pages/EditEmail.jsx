@@ -13,7 +13,7 @@ const EditEmail = () => {
   const [networkers, setNetworkers] = useState([]);
   const [networkingEmailsString, setNetworkingEmailsString] = useState('');
 
-  const [resumeLink, setResumeLink] = useState('https://drive.google.com/file/d/10G3hEQOxqfQMjNDkTX-W6H5Djfik2QtC/view?usp=sharing');
+  const [resumeLink, setResumeLink] = useState('https://drive.google.com/file/d/1yTVmV5n3JTEUM-UqWHlkw-Q6c1W0oFEs/view?usp=sharing');
   const [linkedinLink, setLinkedinLink] = useState('https://www.linkedin.com/in/nitesh-manem/');
   const [githubLink, setGithubLink] = useState('https://github.com/NManem/');
 
@@ -66,6 +66,7 @@ const EditEmail = () => {
   // Generate email drafts
   function generateDrafts() {
     async function makeGmailDraft(draft, networkingEmail, networkersName) {
+      
       const lines = draft.split('\n');
       await fetch('/api/gmail/draft', {
         method: 'POST',

@@ -26,7 +26,7 @@ const TempForm = (props) => {
       });
       const newDraft = await response.json()
       setDraft(newDraft)
-      setFormData(emptyForm)
+      setFormData(prev => ({ ...prev, role: '' }))
     }
     submit()
   }

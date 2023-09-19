@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Base64 as base64 } from 'js-base64';
 dotenv.config();
 
+//? ----------------------------------------HELPER METHODS---------------------------------------->
+
+
 // For Axios
 const generateConfig = (url, accessToken) => {
   return {
@@ -56,7 +59,8 @@ gmailController.getUser = async function (req, res, next) {
 
 gmailController.mimeDraft = async function (req, res, next) {
   try {
-    const { to, subject, body, networkersName, name, linkedinLink, githubLink, resumeLink} = req.body;
+    console.log('inside here')
+    const { to, subject, body, networkersName, name, linkedinLink, githubLink, resumeLink } = req.body;
     const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
     let messageParts = [
       `To: ${to}`,
@@ -94,7 +98,7 @@ gmailController.mimeDraft = async function (req, res, next) {
 
 gmailController.createDraft = async function (req, res, next) {
   try {
-    const {  message } = res.locals;
+    const { message } = res.locals;
     const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
     // The body needs to be base64url encoded.
     const encodedMessage = Buffer.from(message)
@@ -124,7 +128,7 @@ gmailController.createDraft = async function (req, res, next) {
   }
 }
 
-gmailController.getDraft = async function (req, res, next) {
+gmailController.getDraftDetails = async function (req, res, next) {
   try {
     const { emailId } = req.params;
     const url = `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${emailId}`;
@@ -132,9 +136,15 @@ gmailController.getDraft = async function (req, res, next) {
     const config = generateConfig(url, token);
     const response = await axios(config);
     const data = response.data
-    const res = {};
-    // res.to = data["message"]["payload"]["headers"]
-    // res.locals.data = response.data;
+    // console.log(data)
+
+    const from = data.message.payload.headers.find(header => header.name === "From").value;
+    const to = data.message.payload.headers.find(header => header.name === "To").value;
+    const subject = data.message.payload.headers.find(header => header.name === "Subject").value;
+    const bodyData = data.message.payload.body.data;
+    const body = Buffer.from(bodyData, 'base64').toString('utf8');
+    const output = { from, to, subject, body}
+    res.locals.data = output;
     return next()
   }
   catch (err) {
@@ -155,7 +165,7 @@ gmailController.sendDraft = async function (req, res, next) {
       }
     });
     if (response.data && response.data.id) {
-      console.log(`Draft was successfuly sent with ID: ${response.data.id}`)
+      console.log(`Draft was successfuly sent with ID: ${emailId}`)
     }
     else {
       throw new Error(`Failed to send draft ${emailId}`);

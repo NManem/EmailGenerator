@@ -10,5 +10,9 @@ router.post('/subject', openaiController.generateSubjectLine, (req,res)=>{
   return res.status(200).json(res.locals.data);
 });
 
+router.post('/company', openaiController.generatureCompany, (req,res)=>{
+  return res.status(200).json(res.locals.data);
+});
+
 
 export default router;
