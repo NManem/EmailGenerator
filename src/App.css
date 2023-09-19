@@ -1,0 +1,104 @@
+#root {
+  max-width: 100%; /* Set to 100% to make full use of the screen width */
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body.email-page {
+  display: block;
+}
+
+body.email-page > #root {
+  margin: 0;
+  padding: 2rem 0; 
+  text-align: left;
+  width: 100%;
+}
+
+body.email-page > #root > .email-list {
+  align-self: start;
+  justify-self: start;
+  margin: 0 auto;
+}
+
+
+.email-list {
+  width: 100%;
+  margin: 20px 0;  
+  padding: 20px;   
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+  align-self: flex-start;
+}
+
+.email-item {
+  flex: 0 0 auto;
+  width: 300px;
+  border: 1px solid #ccc; /* Adds a light grey border */
+  padding: 10px; /* Add some spacing inside the border */
+  border-radius: 5px; /* Optional: Adds rounded corners */
+  margin: 5px; /* Add some spacing outside the border */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow */
+}
+
+nav {
+  padding: 1rem 2rem;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+
+.popup {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7); /* Dimmed background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* High z-index to ensure it's on top */
+}
+
+.email-details {
+  width: 70%; /* You can adjust this */
+  max-width: 600px; /* Adjust this as needed */
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.2); 
+  position: relative; /* This will help position the close button */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px; 
+  cursor: pointer;
+}
+
+.details-header, .details-body {
+  margin-bottom: 20px;
+}
+
